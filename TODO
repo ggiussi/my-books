@@ -1,6 +1,6 @@
 - deploy to netlify
 - create pages from json
-- use markdown in json
+- use markdown in json (see if I can use this plugin although seems to be tested with tina gatsby-plugin-json-remark)
 - use a CMS (netlifyCMS or tina)
 - try tina (https://tina.io/docs/integrations/gatsby/)
 -

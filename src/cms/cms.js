@@ -9,4 +9,4 @@ import CMS from 'netlify-cms-app'
 
 CMS.init()
 
-CMS.registerPreviewTemplate('about', AboutPagePreview)
+//CMS.registerPreviewTemplate('about', AboutPagePreview)

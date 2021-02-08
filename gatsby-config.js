@@ -32,9 +32,25 @@ module.exports = {
       options: {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
-    }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `books`,
+        path: `${__dirname}/src/data/books`,
+      },
+    },
+    'gatsby-transformer-json'
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    //{
+    //  resolve: 'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
+    //  options: {
+    //    develop: true, // Activates purging in npm run develop
+    //    purgeOnly: ['/all.sass'], // applies purging only on the bulma css file
+    //  },
+    //},
+    //'gatsby-plugin-netlify', // make sure to keep it last in the array
   ],
 }

@@ -11,4 +11,15 @@ backend:
 local_backend: true
 
 # https://www.netlifycms.org/docs/add-to-your-site/#media-and-public-folders
-#media_folder: "src/images/uploads"
+media_folder: "src/images/uploads"
+
+collections:
+  - name: "books"
+    label: "Book"
+    folder: "src/data/books"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: json
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "book"}
+      - {label: "Title", name: "title", widget: "string"}
