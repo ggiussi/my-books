@@ -3,4 +3,8 @@
 - use markdown in json (see if I can use this plugin although seems to be tested with tina gatsby-plugin-json-remark)
 - use a CMS (netlifyCMS or tina)
 - try tina (https://tina.io/docs/integrations/gatsby/)
--
+- find if I can't use subdomains from my domain, so I only pay for one domain and everyone can have their site in ggiussi-my-books.slank.com.
+- can I have reference between collections? maybe in a different CMS
+- check strapi (api based cms) https://strapi.io/blog/build-a-static-blog-with-gatsby-and-strapi
+- how to add slug to json nodes? something like this (but this is for markdown) https://www.gatsbyjs.com/plugins/gatsby-plugin-slug/
+- pagination of quotes https://www.smashingmagazine.com/2020/09/advanced-graphql-usage-gatsby-websites/

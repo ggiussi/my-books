@@ -36,7 +36,7 @@ const BookList: React.FC<PageProps<DataProps>> = ({ data, path }) => (
       You're currently on the page "{path}" which was built on{" "}
       {data.site.buildTime}.
     </p>
-    {data.allBooksJson.nodes.map((e) => <p>{e.title}</p>)}
+    {data.allBooksJson.nodes.map((e) => <p><Link to={e.id}>{e.title}</Link></p>)}
     <p>
       To learn more, head over to our{" "}
       <a href="https://www.gatsbyjs.com/docs/typescript/">
