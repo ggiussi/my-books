@@ -11,7 +11,8 @@ backend:
 local_backend: true
 
 # https://www.netlifycms.org/docs/add-to-your-site/#media-and-public-folders
-media_folder: "src/images/uploads"
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "books"

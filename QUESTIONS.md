@@ -1,0 +1,1 @@
+1. Why do I need to import the layout in book pages? This means gatsby is repainting the entire page again? 

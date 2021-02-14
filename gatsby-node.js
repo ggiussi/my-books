@@ -6,9 +6,12 @@
 const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
+const remark = require('remark')
+const remark_html = require('remark-html')
 //const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 //const slug = require(`slug`)
 
+const R = remark().use(remark_html)
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
@@ -18,7 +21,11 @@ exports.createPages = ({ actions, graphql }) => {
         allBooksJson {
           edges {
             node {
-              id
+              id,
+              templateKey
+              fields {
+                slug
+              }
             }
           }
         }
@@ -34,9 +41,9 @@ exports.createPages = ({ actions, graphql }) => {
     books.forEach((edge) => {
       createPage({
               //path: `/${slug(edge.node.id)}/`,
-              path: `book-list/${String(edge.node.id)}`,
+              path: `books${String(edge.node.fields.slug)}`,
               component: path.resolve(
-                "src/templates/prueba.js"
+                `src/templates/${String(edge.node.templateKey)}.tsx`
               ),
               context: { id: edge.node.id }
             })
@@ -45,12 +52,51 @@ exports.createPages = ({ actions, graphql }) => {
   })
 }
 
-// TODO Can I add slugs to json nodes with this?
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+exports.onCreateNode = ({ node, actions, getNode, createContentDigest }) => {
+  const { createNodeField, createNode } = actions
   //fmImagesToRelative(node) // convert image paths for gatsby images
-  //console.log(node);
-  //if (node.internal.type)
+  
+  if (node.internal.type === `BooksJson`){
+    console.log("Adding slug field");
+    const slug = createFilePath({ node, getNode })
+    const data = {
+      field1: `a string`,
+      field2: 10,
+      field3: true,
+    }
+    createNode({
+      ...data,
+      // Required fields.
+      id: `a-node-id`,
+      parent: null,
+      children: [],
+      internal: {
+        type: `CoolServiceMarkdownField`,
+        contentDigest: createContentDigest(data)
+        //mediaType: `text/markdown`, // optional
+        //content: JSON.stringify(fieldData), // optional
+        //description: `Cool Service: "Title of entry"`, // optional
+      }
+    })
+    createNodeField({
+      name: `slug`,
+      node,
+      value: slug,
+    })
+    
+    // get contents with remark in an async way so I can process files in parallel.
+    if (!_.isNull(node.quotes) && !_.isUndefined(node.quotes)){
+      createNodeField({
+        name: `quotes`,
+        node,
+        value: node.quotes.map((e) => ({text: R.processSync(e.text).contents.toString()}))
+      })
+      
+    }
+    
+    
+  }
+  /*
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode })
     createNodeField({
@@ -59,6 +105,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     })
   }
+  */
 }
 
 

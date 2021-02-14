@@ -8,3 +8,7 @@
 - check strapi (api based cms) https://strapi.io/blog/build-a-static-blog-with-gatsby-and-strapi
 - how to add slug to json nodes? something like this (but this is for markdown) https://www.gatsbyjs.com/plugins/gatsby-plugin-slug/
 - pagination of quotes https://www.smashingmagazine.com/2020/09/advanced-graphql-usage-gatsby-websites/
+- https://webpagetest.org/
+- FIX images! 
+  - https://www.gatsbyjs.com/plugins/gatsby-image/
+  - https://www.gatsbyjs.com/docs/working-with-images/
