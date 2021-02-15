@@ -23,6 +23,7 @@ exports.createPages = ({ actions, graphql }) => {
             node {
               id,
               templateKey
+              cover
               fields {
                 slug
               }
@@ -36,19 +37,20 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    const books = result.data.allBooksJson.edges
-
-    books.forEach((edge) => {
-      createPage({
-              //path: `/${slug(edge.node.id)}/`,
-              path: `books${String(edge.node.fields.slug)}`,
-              component: path.resolve(
-                `src/templates/${String(edge.node.templateKey)}.tsx`
-              ),
-              context: { id: edge.node.id }
-            })
-    })
-
+    if (!_.isUndefined(result.data.allBooksJson)){
+      const books = result.data.allBooksJson.edges
+  
+      books.forEach((edge) => {
+        createPage({
+                //path: `/${slug(edge.node.id)}/`,
+                path: `${String(edge.node.fields.slug)}`,
+                component: path.resolve(
+                  `src/templates/${String(edge.node.templateKey)}.tsx`
+                ),
+                context: { id: edge.node.id, cover: edge.node.cover}
+              })
+      })
+    }
   })
 }
 
@@ -81,15 +83,16 @@ exports.onCreateNode = ({ node, actions, getNode, createContentDigest }) => {
     createNodeField({
       name: `slug`,
       node,
-      value: slug,
+      value: `books${slug}`, // TODO is this the best option?
     })
     
     // get contents with remark in an async way so I can process files in parallel.
+    // There is a better way to do this? If the quote has more than just id and text, I need to replicate everything.
     if (!_.isNull(node.quotes) && !_.isUndefined(node.quotes)){
       createNodeField({
         name: `quotes`,
         node,
-        value: node.quotes.map((e) => ({text: R.processSync(e.text).contents.toString()}))
+        value: node.quotes.map((e) => ({id: e.id, text: R.processSync(e.text).contents.toString()}))
       })
       
     }
@@ -107,5 +110,6 @@ exports.onCreateNode = ({ node, actions, getNode, createContentDigest }) => {
   }
   */
 }
+
 
 

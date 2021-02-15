@@ -12,3 +12,5 @@
 - FIX images! 
   - https://www.gatsbyjs.com/plugins/gatsby-image/
   - https://www.gatsbyjs.com/docs/working-with-images/
+- https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-search/
+- TODO hide uuuid widget. I can hide the input element but the tab showing field's name still appears. I need to reach the parent dom element in widget's react component and add display:none.

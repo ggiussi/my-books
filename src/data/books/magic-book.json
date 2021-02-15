@@ -1,0 +1,13 @@
+{
+  "templateKey": "book",
+  "id": "9425e970-6fad-11eb-89c7-29c28ab2a794",
+  "quotes": [
+    {
+      "id": "ab491190-6fad-11eb-89c7-29c28ab2a794",
+      "text": "Fake quote"
+    }
+  ],
+  "title": "Placeholder book",
+  "author": "Osvaldo Bayer",
+  "show": false
+}

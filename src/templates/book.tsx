@@ -3,13 +3,14 @@ import { graphql, PageProps } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Box from "../components/box"
+import Img from "gatsby-image"
 
 // How can I avoid the fields here?
 interface Book {
     title: string
     cover: string
     fields: {
-        quotes: [{text: string}]
+        quotes: [{text: string, id: string}]
     }
     
 }
@@ -21,11 +22,12 @@ interface BookProps {
 
 // there is any way to avoid data here and just destructure book?
 const Profile = ({data}: {data: Book}) => {
+    // TODO {(data.childImageSharp?.fluid) ? <Img fluid={data.childImageSharp.fluid} /> : <img src={data.cover}></img>}
     return (
     <article className="media">
       <div className="media-left">
-        <figure className="image"> 
-            <img src={data.cover}></img>
+        <figure className="image" style={{ width: `200px`, marginBottom: `1.45rem` }}>
+          <img src={data.cover}></img>
         </figure>
       </div>
       <div className="media-content">
@@ -44,14 +46,16 @@ const Quote = ({text}) => {
 
 const Book = ({data}: PageProps<BookProps>) => {
     const book = data.booksJson
-    
     return (
     <Layout>
         <SEO title={book.title} />
         <Box>
-            <Profile data={book}></Profile>
+            <Profile data={{...book,
+            ...data.placeholderImage}}></Profile>
         </Box>
-        {book.fields.quotes?.map(e => <Quote text={e.text}></Quote>)}
+        {book.fields.quotes?.map(q => 
+          <Quote key={q.id} text={q.text}></Quote>
+        )}
     </Layout>
     )
 }
@@ -68,8 +72,17 @@ export const pageQuery = graphql`
       fields {
           quotes {
               text
+              id
           }
       }
     }
+
+    placeholderImage: file(relativePath: { eq: "screen-shot-2021-02-13-at-22.05.12.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
   }
 `

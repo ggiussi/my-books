@@ -51,12 +51,8 @@ const SEO = ({ description, lang, meta, title, className }: SEOProps) => {
       }
     `)
 
-  console.log("title is " + title);
-  console.log("query title is " + site.siteMetadata?.title);
-
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-
   
   return (
     <Helmet

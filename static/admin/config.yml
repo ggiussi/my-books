@@ -15,16 +15,29 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "authors"
+    label: "Author"
+    folder: "src/data/authors"
+    create: true
+    format: json
+    fields: 
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "author"}
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Id", name: "id", widget: "uuid"}
   - name: "books"
     label: "Book"
     folder: "src/data/books"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     format: json
     fields:
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "book"}
+      - {label: "Id", name: "id", widget: "uuid"}
+      - {label: "Show", name: "show", widget: "boolean", default: true}
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Author", name: "author", widget: "string"}
-      - {label: "Cover", name: "cover", widget: "image"}
+      - {label: "Author", name: "author", widget: "relation", collection: "authors", value_field: "name", search_fields: ["name"]}
+      - {label: "Intro", name: "intro", widget: "markdown", required: false}
+      - {label: "Cover", name: "cover", widget: "image", required: false }
       - {label: "Quotes", name: "quotes", widget: "list",
-         fields: [{label: "Text", widget: "markdown", name: "text"}]}
+         fields: [
+           {label: "Text", widget: "markdown", name: "text"},
+           {label: "Id", widget: "uuid", name: "id"}]}

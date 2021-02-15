@@ -1,0 +1,1 @@
+- https://scotch.io/tutorials/build-an-infinite-scroll-image-gallery-with-gatsby-and-netlify-functions#toc-configure-site-layout
