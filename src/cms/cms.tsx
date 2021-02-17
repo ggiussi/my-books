@@ -33,8 +33,9 @@ const IdControl = ({value, classNameWrapper, onChange, field, forID}) => {
 }
 
 
-const IdPreview = ({value}) => <div>Yes {value}!</div>;
+//const IdPreview = ({value}) => <div>{value}</div>;
 
+// I was using this with the js api but the ts just receives (name,control,[preview])
 var schema = {
   properties: {
     hidden: { type: 'boolean' },
@@ -43,5 +44,5 @@ var schema = {
 
 
 CMS.init()
-CMS.registerWidget('uuid', IdControl, IdPreview)
+CMS.registerWidget('uuid', IdControl)
 CMS.registerPreviewTemplate('books', BookPreview)

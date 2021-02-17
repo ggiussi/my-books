@@ -2,7 +2,6 @@ import React from 'react'
 import { graphql, PageProps } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Box from "../components/box"
 import Book from "../components/book"
 import Img from "gatsby-image"
 
@@ -26,7 +25,7 @@ const BookTemplate = ({data}: PageProps<BookProps>) => {
     return (
     <Layout>
         <SEO title={book.title} />
-        <Book title={book.title} quotes={book.fields.quotes}></Book>
+        <Book title={book.title} quotes={book.fields.quotes} cover={book.cover}></Book>
     </Layout>
     )
 }

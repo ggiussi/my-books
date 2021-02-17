@@ -11,13 +11,20 @@ const R = remark().use(remark_html)
 // pass destructured (title= and quotes=) or the entire object book={{title: }}
 // the processSync is kinda slow
 // Ideally, the html corresponding to the markdown should be provided in props.fieldsMetaData but is not. I should open an issue to netlify-cms for this
-// https://github.com/netlify/netlify-cms/blob/4d296ed77e48ff49fde9041ead0c63d1f93e1b56/packages/netlify-cms-widget-markdown/src/MarkdownPreview.js#L20
-const BookPreview: FunctionComponent<PreviewTemplateComponentProps> = ({entry}) => {
+// I could reuse this maybe https://github.com/netlify/netlify-cms/blob/4d296ed77e48ff49fde9041ead0c63d1f93e1b56/packages/netlify-cms-widget-markdown/src/MarkdownPreview.js#L20
+// book={{title: entry.getIn(['data','title'])}}
+const BookPreview: FunctionComponent<PreviewTemplateComponentProps> = ({entry, getAsset}) => {
+  const coverImg = entry.getIn(['data','cover'])
+
   return (
-  <Book title={entry.getIn(['data','title'])}
-        quotes={entry.getIn(['data','quotes'])?.map(q => q.update('text',t => R.processSync(t).contents.toString())).toJS()}
-        book={{title: entry.getIn(['data','title'])}}>
-  </Book>
+    <div className="columns is-centered">
+      <div className="column is-three-quarters">
+        <Book title={entry.getIn(['data','title'])}
+            quotes={entry.getIn(['data','quotes'])?.map(q => q.update('text',t => R.processSync(t).contents.toString())).toJS()}
+            cover={coverImg ? getAsset(coverImg).url : ""}>
+        </Book>
+      </div>
+    </div>
 )}
 
 export default BookPreview

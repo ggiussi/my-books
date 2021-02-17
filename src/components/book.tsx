@@ -7,6 +7,7 @@ import Box from "./box"
 
 interface BookProps {
   title: string
+  cover: string
   quotes: [{text: string, id: string}]
 
   
@@ -36,11 +37,11 @@ const Quote = ({text}) => {
     return <Box><div className="content" dangerouslySetInnerHTML={{__html: text}}></div></Box>
 }
 
-const Book = ({title, quotes}: BookProps) => {
+const Book = ({title, quotes, cover}: BookProps) => {
     return (
         <>
           <Box>
-            <Profile title={title}></Profile>
+            <Profile title={title} cover={cover}></Profile>
           </Box>
         {quotes?.map(q => 
           <Quote key={q.id} text={q.text}></Quote>
