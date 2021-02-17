@@ -3,10 +3,11 @@ import { graphql, PageProps } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Box from "../components/box"
+import Book from "../components/book"
 import Img from "gatsby-image"
 
 // How can I avoid the fields here?
-interface Book {
+interface BookType {
     title: string
     cover: string
     fields: {
@@ -16,51 +17,21 @@ interface Book {
 }
 
 interface BookProps {
-    booksJson: Book
+  booksJson: BookType
     
 }
 
-// there is any way to avoid data here and just destructure book?
-const Profile = ({data}: {data: Book}) => {
-    // TODO {(data.childImageSharp?.fluid) ? <Img fluid={data.childImageSharp.fluid} /> : <img src={data.cover}></img>}
-    return (
-    <article className="media">
-      <div className="media-left">
-        <figure className="image" style={{ width: `200px`, marginBottom: `1.45rem` }}>
-          <img src={data.cover}></img>
-        </figure>
-      </div>
-      <div className="media-content">
-          <div className="content">
-              <h1 className="title is-3">{data.title}</h1>
-          </div>
-      </div>
-    </article>
-)
-}
-
-// TODO there is a better way to do this?
-const Quote = ({text}) => {
-    return <Box><div dangerouslySetInnerHTML={{__html: text}}></div></Box>
-}
-
-const Book = ({data}: PageProps<BookProps>) => {
+const BookTemplate = ({data}: PageProps<BookProps>) => {
     const book = data.booksJson
     return (
     <Layout>
         <SEO title={book.title} />
-        <Box>
-            <Profile data={{...book,
-            ...data.placeholderImage}}></Profile>
-        </Box>
-        {book.fields.quotes?.map(q => 
-          <Quote key={q.id} text={q.text}></Quote>
-        )}
+        <Book title={book.title} quotes={book.fields.quotes}></Book>
     </Layout>
     )
 }
 
-export default Book;
+export default BookTemplate;
 
 // https://www.gatsbyjs.com/blog/gatsbygram-case-study/
 // https://github.com/gatsbyjs/gatsby/blob/master/examples/gatsbygram/gatsby-node.js

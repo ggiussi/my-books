@@ -10,7 +10,7 @@ const remark = require('remark')
 const remark_html = require('remark-html')
 //const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 //const slug = require(`slug`)
-
+//const R = require('./src/utils/remark.js')
 const R = remark().use(remark_html)
 
 exports.createPages = ({ actions, graphql }) => {

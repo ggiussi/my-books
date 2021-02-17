@@ -23,7 +23,7 @@ collections:
     fields: 
       - {label: "Template Key", name: "templateKey", widget: "hidden", default: "author"}
       - {label: "Name", name: "name", widget: "string"}
-      - {label: "Id", name: "id", widget: "uuid"}
+      - {label: "Id", name: "id", widget: "uuid", hidden: true}
   - name: "books"
     label: "Book"
     folder: "src/data/books"

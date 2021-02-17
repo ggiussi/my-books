@@ -13,6 +13,7 @@ type DataProps = {
     nodes: [{
                title: string
                id: string
+               cover: string
                fields: {
                  slug: string
                }
@@ -20,6 +21,26 @@ type DataProps = {
   }
 }
 
+/*
+<div className="columns is-multiline is-mobile">
+      {data.allBooksJson.nodes.map((e) => 
+        <div className="column is-flex is-narrow" key={e.id} >
+          <div className="box" style={{width: "200px"}}>
+            <figure className="image" style={{width: "150px", height: "200px"}}>
+              <img src={e.cover} style={{maxWidth: "150px", maxHeight: "200px"}}></img>
+            </figure>
+            
+            <Link to={e.fields.slug}>{e.title}</Link>
+          </div>
+          
+        </div> 
+      )}
+      </div>
+*/
+
+// si uso is-flex en la columna que tiene is-half-mobile me acomoda bien el height pero me rompe el width
+// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+// https://bulma.io/documentation/helpers/flexbox-helpers/
 const IndexPage = ({data}: PageProps<DataProps>) => (
   <Layout>
     <SEO title="Home" />
@@ -29,9 +50,22 @@ const IndexPage = ({data}: PageProps<DataProps>) => (
       <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
         <Image />
       </div>
-    {data.allBooksJson.nodes.map((e) => 
-      <p key={e.id}><Link to={e.fields.slug}>{e.title}</Link></p> 
-    )}
+
+      <div className="columns is-multiline is-mobile">
+      {data.allBooksJson.nodes.map((e) => 
+        <div className="column is-flex is-align-items-stretch is-half-mobile is-one-quarter-desktop" key={e.id} >
+          <div className="box">
+            <figure className="image">
+              <img src={e.cover} style={{maxWidth: "150px", maxHeight: "200px"}}></img>
+            </figure>
+            
+            <Link to={e.fields.slug}>{e.title}</Link>
+          </div>
+          
+        </div> 
+      )}
+      </div>
+
     </Box>
     <Box>
     <SearchBar />
@@ -47,6 +81,7 @@ export const query = graphql`
       nodes {
         title
         id
+        cover
         fields {
           slug
         }

@@ -14,3 +14,22 @@
   - https://www.gatsbyjs.com/docs/working-with-images/
 - https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-search/
 - TODO hide uuuid widget. I can hide the input element but the tab showing field's name still appears. I need to reach the parent dom element in widget's react component and add display:none.
+- react & media queries https://www.npmjs.com/package/react-responsive. it is better to use this or with css? I mean I could 
+  add a query in the css like I did to resize a 128x128 bulma image 
+  ```
+  @media screen and (max-width: 768px) {
+  .media {
+    display: block;
+  }
+
+  .media-content {
+    margin-top: 1rem !important;
+  }
+
+  .media > .media-left > .image.is-128x128 {
+    height: 64px;
+    width: 64px;
+  }
+
+}
+  ```

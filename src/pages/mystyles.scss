@@ -2,3 +2,8 @@
 // If need, change your variables before importing Bulma
 $title-color: #ff0000;
 @import "~bulma/bulma.sass";
+
+body {
+    // https://stackoverflow.com/questions/49642824/bulma-columns-mobile-overflowing-body
+    // overflow-x: hidden;
+ }
