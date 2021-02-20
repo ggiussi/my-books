@@ -21,23 +21,6 @@ type DataProps = {
   }
 }
 
-/*
-<div className="columns is-multiline is-mobile">
-      {data.allBooksJson.nodes.map((e) => 
-        <div className="column is-flex is-narrow" key={e.id} >
-          <div className="box" style={{width: "200px"}}>
-            <figure className="image" style={{width: "150px", height: "200px"}}>
-              <img src={e.cover} style={{maxWidth: "150px", maxHeight: "200px"}}></img>
-            </figure>
-            
-            <Link to={e.fields.slug}>{e.title}</Link>
-          </div>
-          
-        </div> 
-      )}
-      </div>
-*/
-
 // si uso is-flex en la columna que tiene is-half-mobile me acomoda bien el height pero me rompe el width
 // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 // https://bulma.io/documentation/helpers/flexbox-helpers/
@@ -51,12 +34,12 @@ const IndexPage = ({data}: PageProps<DataProps>) => (
         <Image />
       </div>
 
-      <div className="columns is-multiline is-mobile">
+      <div className="columns is-mobile is-multiline is-align-items-stretch is-justify-content-center">
       {data.allBooksJson.nodes.map((e) => 
-        <div className="column is-flex is-align-items-stretch is-half-mobile is-one-quarter-desktop" key={e.id} >
+        <div className="book-column column is-narrow is-flex-shrink-0 is-flex is-align-items-stretch" key={e.id} >
           <div className="box">
             <figure className="image">
-              <img src={e.cover} style={{maxWidth: "150px", maxHeight: "200px"}}></img>
+              <img src={e.cover ? e.cover : "images/cover_placeholder.jpg" }></img>
             </figure>
             
             <Link to={e.fields.slug}>{e.title}</Link>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import Book from '../../components/book'
 import { PreviewTemplateComponentProps } from 'netlify-cms-core'
-import "../../pages/mystyles.scss"
+//import "../../pages/mystyles.scss" https://github.com/gatsbyjs/gatsby/issues/24577#issuecomment-778840360
 //import R from "../../utils/remark" TODO why isn't working?
 const remark = require('remark')
 const remark_html = require('remark-html')

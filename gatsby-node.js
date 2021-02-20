@@ -59,7 +59,6 @@ exports.onCreateNode = ({ node, actions, getNode, createContentDigest }) => {
   //fmImagesToRelative(node) // convert image paths for gatsby images
   
   if (node.internal.type === `BooksJson`){
-    console.log("Adding slug field");
     const slug = createFilePath({ node, getNode })
     const data = {
       field1: `a string`,

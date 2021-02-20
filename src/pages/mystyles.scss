@@ -7,3 +7,39 @@ body {
     // https://stackoverflow.com/questions/49642824/bulma-columns-mobile-overflowing-body
     // overflow-x: hidden;
  }
+
+
+@mixin book-column($boxWidth,$imageWidth,$height){
+    .book-column {
+        > .box {
+         width: $boxWidth;
+    
+         > .image {
+             width: $imageWidth;
+             height: $height;
+    
+             > img {
+                max-width: $imageWidth;
+                max-height: $height; 
+             }
+         }
+        }
+    }
+}
+
+@media screen {
+  @include book-column(200px,150px,200px);
+}
+
+
+/*
+@media screen and (min-width: $tablet){
+  @include book-column(200px,150px,200px)
+}
+
+@media screen and (max-width: $tablet - 1px){
+    @include book-column(120px,80px,100px)
+}
+*/
+
+    
