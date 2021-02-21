@@ -8,6 +8,9 @@ body {
     // overflow-x: hidden;
  }
 
+// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+// https://bulma.io/documentation/helpers/flexbox-helpers/
+// 
 
 @mixin book-column($boxWidth,$imageWidth,$height){
     .book-column {

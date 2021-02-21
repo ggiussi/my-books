@@ -1,6 +1,9 @@
+const prueba = require('gatsby-prueba')
+
+
 module.exports = {
   siteMetadata: {
-    title: `YourBooks`,
+    title: prueba.name, //`YourBooks`,
     description: `List your favorite books`,
     author: `@gatsbyjs`,
   },
